@@ -14,5 +14,4 @@ public class RadarTest {
         radar.notice(new Scud());
         verify(batteryMock).launchPatriot();
     }
-
 }
