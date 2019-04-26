@@ -20,5 +20,13 @@ public class ThreadExecutor implements Executor {
 		}
 		
 	}
+	
+	public ExecutorType getType() {
+		return type;
+	}
+
+	public void setType(ExecutorType type) {
+		this.type = type;
+	}
 
 }

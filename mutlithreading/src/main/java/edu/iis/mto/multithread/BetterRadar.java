@@ -18,12 +18,14 @@ public class BetterRadar implements Runnable {
 	}
 
 	private void launchPatriot() {
-		
+		executor.execute(this);
 	}
 	
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
+		for(int i = 0; i < rocketsCount; i++) {
+			patriotBattery.launchPatriot();
+		}
 		
 	}
 	
