@@ -1,7 +1,6 @@
 package edu.iis.mto.multithread;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -43,6 +42,26 @@ public class RadarTest {
         radar.notice(new Scud());
         verify(batteryMock, times(2)).launchPatriot();
     }
-    
+
+    @Test
+    @RepeatRule.Repeat(times = 10)
+    public void shouldNotLaunchPatriotWhenNotNoticesAScudMissle() {
+
+        LaunchPatriotTask task = new LaunchPatriotTask(batteryMock, 5);
+        BetterRadar radar = new BetterRadar(executor, task);
+        verify(batteryMock, times(0)).launchPatriot();
+    }
+
+    @Test
+    @RepeatRule.Repeat(times = 10)
+    public void shouldLaunchFourPatriotWhenNoticesTwoScud() {
+
+        LaunchPatriotTask task = new LaunchPatriotTask(batteryMock, 2);
+        BetterRadar radar = new BetterRadar(executor, task);
+        radar.notice(new Scud());
+        radar.notice(new Scud());
+
+        verify(batteryMock, times(4)).launchPatriot();
+    }
 
 }
