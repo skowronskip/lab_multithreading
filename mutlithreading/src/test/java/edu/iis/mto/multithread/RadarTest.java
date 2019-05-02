@@ -35,7 +35,7 @@ public class RadarTest {
 
     @Test
     @RepeatRule.Repeat(times = 10)
-    public void launchPatriotTwiceWhenNoticesAScudMissle() {
+    public void launchTwoPatriotsWhenNoticesAScudMissle() {
 
         LaunchPatriotTask task = new LaunchPatriotTask(batteryMock, 2);
         BetterRadar radar = new BetterRadar(executor, task);
@@ -54,7 +54,7 @@ public class RadarTest {
 
     @Test
     @RepeatRule.Repeat(times = 10)
-    public void shouldLaunchFourPatriotWhenNoticesTwoScud() {
+    public void shouldLaunchFourPatriotsWhenNoticesTwoScud() {
 
         LaunchPatriotTask task = new LaunchPatriotTask(batteryMock, 2);
         BetterRadar radar = new BetterRadar(executor, task);
