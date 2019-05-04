@@ -8,7 +8,7 @@ import org.junit.Test;
 public class RadarTest {
 
     @Test
-    public void launchPatriotOnceWhenNoticesAScudMissle() {
+    public void launchPatriotOnceWhenNoticesAScudMissile() {
         PatriotBattery batteryMock = mock(PatriotBattery.class);
         Radar radar = new Radar(batteryMock);
         radar.notice(new Scud());
