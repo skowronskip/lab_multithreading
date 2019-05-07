@@ -18,12 +18,14 @@ public class BetterRadar implements Runnable {
     }
 
     private void launchPatriot() {
-
+        executor.execute(this);
     }
 
 
     @Override
     public void run() {
-
+        for (int i = 0; i < amount; i++) {
+            battery.launchPatriot();
+        }
     }
 }
