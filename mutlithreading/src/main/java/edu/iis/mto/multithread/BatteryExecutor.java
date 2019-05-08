@@ -15,7 +15,7 @@ public class BatteryExecutor implements Executor {
         if (isTheSameThread) {
             launchPatriotTask.run();
         } else {
-            new Thread(launchPatriotTask).start();
+            new Thread(launchPatriotTask).run();
         }
     }
 }
