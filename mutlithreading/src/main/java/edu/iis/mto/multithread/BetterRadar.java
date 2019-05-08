@@ -2,7 +2,7 @@ package edu.iis.mto.multithread;
 
 import java.util.concurrent.Executor;
 
-public class BetterRadar {
+public class BetterRadar implements Runnable {
 
     private PatriotBattery patriotBattery;
     private Executor executor;
@@ -15,7 +15,17 @@ public class BetterRadar {
     }
 
     public void notice(Scud enemyMissle) {
-        //TODO add implementation
+        launchPatriot();
     }
 
+    private void launchPatriot() {
+        executor.execute(this);
+    }
+
+    @Override
+    public void run() {
+        for (int i = 0; i < rocketsAmount; i++) {
+            patriotBattery.launchPatriot();
+        }
+    }
 }
