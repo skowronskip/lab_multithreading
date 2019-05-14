@@ -12,7 +12,7 @@ public class BetterRadarTest {
     @Test
     public void launchPatriotOnceWhenNoticesAScudMissle() {
         PatriotBattery batteryMock = mock(PatriotBattery.class);
-        BetterRadar radar = new BetterRadar(new PatriotLauncher(batteryMock, 1), new CurrentThreadExecutor());
+        BetterRadar radar = new BetterRadar(1, new PatriotMissileLauncher(batteryMock), new CurrentThreadExecutor());
         radar.notice(new Scud());
         verify(batteryMock).launchPatriot();
     }
