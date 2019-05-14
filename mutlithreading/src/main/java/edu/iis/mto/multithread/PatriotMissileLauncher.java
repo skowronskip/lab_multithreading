@@ -10,7 +10,7 @@ public class PatriotMissileLauncher implements MissileLauncher {
 
     @Override
     public void launch() {
-
+        this.patriotBattery.launchPatriot();
     }
 
     @Override
