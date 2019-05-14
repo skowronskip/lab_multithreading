@@ -2,5 +2,5 @@ package edu.iis.mto.multithread;
 
 public interface MissileLauncher {
 
-    void launch();
+    void launch(int missilesToLaunch);
 }

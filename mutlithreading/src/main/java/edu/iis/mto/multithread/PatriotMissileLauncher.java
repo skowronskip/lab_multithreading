@@ -9,7 +9,9 @@ public class PatriotMissileLauncher implements MissileLauncher {
     }
 
     @Override
-    public void launch() {
-        this.patriotBattery.launchPatriot();
+    public void launch(int missilesToLaunch) {
+        for (int i = 0; i < missilesToLaunch; i++) {
+            this.patriotBattery.launchPatriot();
+        }
     }
 }

@@ -20,9 +20,7 @@ public class BetterRadar {
 
     private void launchPatriot() {
         this.executor.execute(() -> {
-            for (int i = 0; i < missilesToLaunch; i++) {
-                this.missileLauncher.launch();
-            }
+            this.missileLauncher.launch(missilesToLaunch);
         });
     }
 }
