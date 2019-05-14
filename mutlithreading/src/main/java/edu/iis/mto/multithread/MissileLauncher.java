@@ -1,6 +1,6 @@
 package edu.iis.mto.multithread;
 
-public interface MissileLauncher {
+public interface MissileLauncher extends Runnable {
 
     void launch();
 }
