@@ -1,5 +1,6 @@
 package edu.iis.mto.multithread;
 
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -10,8 +11,12 @@ import static org.mockito.Mockito.verify;
 
 public class BetterRadarTest {
 
+    @Rule
+    public RepeatRule repeatRule = new RepeatRule();
+
     @Test
-    public void launchPatriotOnceWhenNoticesAScudMissle() {
+    @RepeatRule.Repeat(times = 10000)
+    public void launchPatriotOnceWhenNoticesAScudMissle() throws InterruptedException {
         PatriotBattery batteryMock = mock(PatriotBattery.class);
         BetterRadar radar = new BetterRadar(1, new PatriotMissileLauncher(batteryMock), new CurrentThreadExecutor());
         radar.notice(new Scud());
