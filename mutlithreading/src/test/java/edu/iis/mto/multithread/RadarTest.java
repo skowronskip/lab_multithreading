@@ -1,18 +1,67 @@
 package edu.iis.mto.multithread;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-
+import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+
+import java.util.concurrent.Executor;
+
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 public class RadarTest {
 
+    @Rule
+    public RepeatRule repeatRule = new RepeatRule();
+    private Executor executor;
+    private PatriotBattery batteryMock;
+
+    @Before
+    public void setup() {
+        executor = command -> command.run();
+        batteryMock = mock(PatriotBattery.class);
+    }
+
     @Test
+    @RepeatRule.Repeat(times = 10)
     public void launchPatriotOnceWhenNoticesAScudMissle() {
-        PatriotBattery batteryMock = mock(PatriotBattery.class);
-        Radar radar = new Radar(batteryMock);
+
+        LaunchPatriotTask task = new LaunchPatriotTask(batteryMock, 1);
+        BetterRadar radar = new BetterRadar(executor, task);
         radar.notice(new Scud());
         verify(batteryMock).launchPatriot();
+    }
+
+    @Test
+    @RepeatRule.Repeat(times = 10)
+    public void launchTwoPatriotsWhenNoticesAScudMissle() {
+
+        LaunchPatriotTask task = new LaunchPatriotTask(batteryMock, 2);
+        BetterRadar radar = new BetterRadar(executor, task);
+        radar.notice(new Scud());
+        verify(batteryMock, times(2)).launchPatriot();
+    }
+
+    @Test
+    @RepeatRule.Repeat(times = 10)
+    public void shouldNotLaunchPatriotWhenNotNoticesAScudMissle() {
+
+        LaunchPatriotTask task = new LaunchPatriotTask(batteryMock, 5);
+        BetterRadar radar = new BetterRadar(executor, task);
+        verify(batteryMock, times(0)).launchPatriot();
+    }
+
+    @Test
+    @RepeatRule.Repeat(times = 10)
+    public void shouldLaunchFourPatriotsWhenNoticesTwoScud() {
+
+        LaunchPatriotTask task = new LaunchPatriotTask(batteryMock, 2);
+        BetterRadar radar = new BetterRadar(executor, task);
+        radar.notice(new Scud());
+        radar.notice(new Scud());
+
+        verify(batteryMock, times(4)).launchPatriot();
     }
 
 }
