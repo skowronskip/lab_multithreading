@@ -1,26 +1,29 @@
 package edu.iis.mto.multithread;
 
-public class Radar {
-	private PatriotBattery battery;
+public class Radar implements Notifiable {
 
-	public Radar(PatriotBattery battery) {
-		this.battery = battery;
-	}
+    private PatriotBattery battery;
 
-	public void notice(Scud enemyMissle) {
-		launchPatriot();
-	}
+    public Radar(PatriotBattery battery) {
+        this.battery = battery;
+    }
 
-	private void launchPatriot() {
-		Runnable launchPatriotTask = new Runnable() {
-			public void run() {
-				for (int i = 0; i < 10; i++) {
-					battery.launchPatriot();
-				}
-			}
-		};
+    @Override
+    public void notice(Scud enemyMissile) {
+        launchPatriot();
+    }
 
-		Thread launchingThread = new Thread(launchPatriotTask);
-		launchingThread.start();
-	}
+    private void launchPatriot() {
+        Runnable launchPatriotTask = new Runnable() {
+
+            public void run() {
+                for (int i = 0; i < 10; i++) {
+                    battery.launchPatriot();
+                }
+            }
+        };
+
+        Thread launchingThread = new Thread(launchPatriotTask);
+        launchingThread.start();
+    }
 }
