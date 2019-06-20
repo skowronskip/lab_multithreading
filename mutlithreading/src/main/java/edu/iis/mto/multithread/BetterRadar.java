@@ -3,12 +3,11 @@ package edu.iis.mto.multithread;
 import java.util.concurrent.Executor;
 
 public class BetterRadar {
-	private PatriotBattery battery;
+	private LaunchPatriot launchPatriot;
 	private Executor executor;
-	private int patriotAmount = 10;
 
-	public BetterRadar(PatriotBattery battery, Executor executor) {
-		this.battery = battery;
+	public BetterRadar(LaunchPatriot launchPatriot, Executor executor) {
+		this.launchPatriot = launchPatriot;
 		this.executor = executor;
 	}
 
@@ -17,10 +16,6 @@ public class BetterRadar {
 	}
 
 	private void launchPatriot() {
-		executor.execute(() -> {
-			for (int i = 0; i < patriotAmount; i++) {
-				battery.launchPatriot();
-			}
-		});
+		executor.execute(() -> launchPatriot.launchPatriot());
 	}
 }
