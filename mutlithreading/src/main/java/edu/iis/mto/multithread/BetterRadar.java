@@ -5,6 +5,7 @@ import java.util.concurrent.Executor;
 public class BetterRadar {
 	private PatriotBattery battery;
 	private Executor executor;
+	private int patriotAmount = 10;
 
 	public BetterRadar(PatriotBattery battery, Executor executor) {
 		this.battery = battery;
@@ -17,7 +18,7 @@ public class BetterRadar {
 
 	private void launchPatriot() {
 		executor.execute(() -> {
-			for (int i = 0; i < 10; i++) {
+			for (int i = 0; i < patriotAmount; i++) {
 				battery.launchPatriot();
 			}
 		});
